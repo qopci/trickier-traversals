@@ -11,7 +11,18 @@ public class Traversals {
    * @return the sum of leaf node values, or 0 if the tree is null
    */
   public static int sumLeafNodes(TreeNode<Integer> node) {
-    return 0;
+    if (node == null) {
+      return 0;
+    }
+
+    while (node.left == null && node.right == null) {
+      return node.value;
+    }
+
+    int leftSum = sumLeafNodes(node.left);
+    int rightSum = sumLeafNodes(node.right);
+
+    return leftSum + rightSum; // total sum
   }
 
   /**
