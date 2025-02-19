@@ -98,6 +98,7 @@ public class Traversals {
         queue.add(current.right);
       }
     }
+    
     return result;
   }
 
@@ -141,7 +142,28 @@ public class Traversals {
    * @return true if there exists a strictly increasing root-to-leaf path, false otherwise
    */
   public static boolean hasStrictlyIncreasingPath(TreeNode<Integer> node) {
-    return false;
+    if (node == null) {
+      return false;
+    }
+
+    return hasStrictlyIncreasingPathHelper(node, Integer.MIN_VALUE);
+  }
+
+  // helper method 
+  public static boolean hasStrictlyIncreasingPathHelper(TreeNode<Integer> node, int previousValue) {
+    if (node == null) {
+      return false;
+    }
+
+    if (node.value <= previousValue) {
+      return false;
+    }
+
+    if (node.left == null && node.right == null) {
+      return true;
+    }
+
+    return hasStrictlyIncreasingPathHelper(node.left, node.value) || hasStrictlyIncreasingPathHelper(node.right, node.value);
   }
 
   // OPTIONAL CHALLENGE
